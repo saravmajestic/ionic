@@ -3,7 +3,11 @@ Ionic Tabbed Slidebox
 
 This component is wrapper of [ionic slidebox][1]. This will contain tabs/icons at the top of the slidebox. Clicking the tabs/icons will trigger the slidebox to go to corresponding page.
 
-Demo: [Ionic tabbed slidebox] [2]
+###Preview: 
+
+![Alt text](http://ionic-sarav.rhcloud.com/ionic/tabbedSlideBox/preview.jpg "Optional title")
+
+###Demo: [Ionic tabbed slidebox] [2]
 
 Installing
 ======
