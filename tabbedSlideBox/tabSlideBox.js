@@ -49,7 +49,7 @@ angular.module('tabSlideBox', [])
 					var curEl = angular.element(icons[index]), curElWidth = curEl[0].offsetWidth;
 					wrap.style.left = "0px";
 					var initLeft = wrap.offsetLeft;
-					var leftStr = (middle - initLeft -  (curElWidth*(index + 1)) +  curElWidth/2) + "px";
+					var leftStr = (middle - initLeft -  (curElWidth*(index + 1)) +  curElWidth/2 + 7) + "px";
 					wrap.style.webkitTransform =  "translate3d("+leftStr+",0,0)" ;
 					
 					angular.element(iconsDiv[0].querySelector(".active")).removeClass("active");

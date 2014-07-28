@@ -12,12 +12,12 @@
     background-color: #fff;
     text-align: center;
     font-weight: 300;
-    background-color: #007bff;
+    background-color: #0398dc;
 }
 
 .tabbed-slidebox .tsb-icons {
     text-align: center;
-    margin-bottom: 10px;
+    margin: 10px 0;
     position: relative;
 }
 
@@ -30,15 +30,15 @@
 
 .tabbed-slidebox .tsb-icons a {
     display: inline-block;
-    width: 42px;
-    font-size: 2em;
+    width: 54px;
+    font-size: 2.5em;
     color: rgba(0, 0, 0, 0.3);
 	-webkit-transform:translate3d(0,8px,0);
 }
 
 .tabbed-slidebox .tsb-icons a.active {
     color: rgba(0, 0, 0, 1);
-    font-size: 2.5em;
+    font-size: 3.5em;
 	-webkit-transform:translate3d(0,0,0);
 }
 
@@ -52,12 +52,12 @@
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 0 1em 1em 1em;
-    border-color: transparent transparent #007bff transparent;
+    border-width: 0 1.4em 1.4em 1.4em;
+    border-color: transparent transparent #0398dc transparent;
     position: absolute;
     content: "";
     display: block;
-    top: 33px;
+    top: 42px;
     left: 50%;
     margin-left: -12px;
 }
