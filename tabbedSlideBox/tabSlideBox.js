@@ -61,7 +61,9 @@ angular.module('tabSlideBox', [])
 					setPosition(data.index);
 				});
 				
-				setPosition(Math.floor(icons.length/2));
+				//Initializing the middle tab always
+				var initialIndex = Math.floor(icons.length/2);console.log(initialIndex);
+				$timeout(function(){$ionicSlideBoxDelegate.slide(initialIndex);}, 0);
 			},
 			controller : function($scope, $attrs, $element) {
 				$scope.events = new SimplePubSub();
