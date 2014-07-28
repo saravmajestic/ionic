@@ -46,13 +46,14 @@ angular.module('tabSlideBox', [])
 				
 				function setPosition(index){
 					var middle = iconsDiv[0].offsetWidth/2, wrap = iconsDiv[0].querySelector(".tsb-ic-wrp");
+					var curEl = angular.element(icons[index]), curElWidth = curEl[0].offsetWidth;
 					wrap.style.left = "0px";
 					var initLeft = wrap.offsetLeft;
-					var leftStr = (middle - initLeft -  (42*(index + 1)) +  22) + "px";
+					var leftStr = (middle - initLeft -  (curElWidth*(index + 1)) +  curElWidth/2) + "px";
 					wrap.style.webkitTransform =  "translate3d("+leftStr+",0,0)" ;
 					
 					angular.element(iconsDiv[0].querySelector(".active")).removeClass("active");
-					angular.element(icons[index]).addClass("active");
+					curEl.addClass("active");
 				};
 				
 				var events = scope.events;
