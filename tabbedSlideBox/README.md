@@ -5,7 +5,7 @@ This component is wrapper of [ionic slidebox][1]. This will contain tabs/icons a
 
 ###Preview: 
 
-![Alt text](http://ionic-sarav.rhcloud.com/ionic/tabbedSlideBox/preview.jpg "Preview of tabbed slidebox")
+![Preview of tabbed slidebox](http://ionic-sarav.rhcloud.com/ionic/tabbedSlideBox/preview.jpg "Preview of tabbed slidebox")
 
 ###Demo: [Ionic tabbed slidebox] [2]
 
