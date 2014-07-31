@@ -57,7 +57,7 @@
     position: absolute;
     content: "";
     display: block;
-    top: 42px;
+    top: 3em;
     left: 50%;
     margin-left: -12px;
 }
