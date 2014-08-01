@@ -36,7 +36,7 @@ angular.module('tabSlideBox', [])
 				var ta = element[0], $ta = element;
 				$ta.addClass("tabbed-slidebox");
 				
-				var iconsDiv = angular.element(ta.querySelector(".tsb-icons")), icons = iconsDiv.find("a");
+				var iconsDiv = angular.element(ta.querySelector(".tsb-icons")), icons = iconsDiv.find("a"), wrap = iconsDiv[0].querySelector(".tsb-ic-wrp"), totalTabs = icons.length;
 				angular.forEach(icons, function(value, key){
 				     var a = angular.element(value);
 				     a.on('click', function(){
@@ -45,7 +45,7 @@ angular.module('tabSlideBox', [])
 				});
 				
 				function setPosition(index){
-					var middle = iconsDiv[0].offsetWidth/2, wrap = iconsDiv[0].querySelector(".tsb-ic-wrp");
+					var middle = iconsDiv[0].offsetWidth/2;
 					var curEl = angular.element(icons[index]), curElWidth = curEl[0].offsetWidth, curElLeft = curEl[0].offsetLeft;
 					var leftStr = (middle  - (curElLeft) -  curElWidth/2 + 5) + "px";
 					wrap.style.webkitTransform =  "translate3d("+leftStr+",0,0)" ;
@@ -59,9 +59,20 @@ angular.module('tabSlideBox', [])
 					setPosition(data.index);
 				});
 				
-				//Initializing the middle tab always
-				var initialIndex = Math.floor(icons.length/2);console.log(initialIndex);
-				$timeout(function(){$ionicSlideBoxDelegate.slide(initialIndex);}, 0);
+				var initialIndex = attrs.tab;
+				//Initializing the middle tab
+				if(typeof attrs.tab === 'undefined' || (totalTabs <= initialIndex) || initialIndex < 0){
+					initialIndex = Math.floor(icons.length/2);
+				}
+				
+				//If initial element is 0, set position of the tab to 0th tab 
+				if(initialIndex == 0){
+					setPosition(0);
+				}
+				
+				$timeout(function() {
+					$ionicSlideBoxDelegate.slide(initialIndex);
+				}, 0);
 			},
 			controller : function($scope, $attrs, $element) {
 				$scope.events = new SimplePubSub();
