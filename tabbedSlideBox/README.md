@@ -61,6 +61,9 @@ var app = angular.module('slidebox', ['ionic', 'tabSlideBox']);
             </tab-slide-box>
 
 ```
+Options
+======
+- select a tab onload - set `tab` attribute for `tab-slide-box`. If not set, it will default to middle tab
 
 [1]:http://ionicframework.com/docs/api/directive/ionSlideBox/
 [2]:http://ionic-sarav.rhcloud.com/ionic/tabbedSlideBox/
