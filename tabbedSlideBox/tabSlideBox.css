@@ -57,7 +57,29 @@
     position: absolute;
     content: "";
     display: block;
-    top: 3em;
+    bottom: -12px;
     left: 50%;
-    margin-left: -13px;
+    margin-left: -14px;
+}
+.tsb-hscroll.scroll-view{
+  	white-space: nowrap;
+}
+.tsb-hscroll.scroll-view .scroll-bar{
+	visibility:hidden;
+}
+.tsb-hscroll.scroll-view .scroll.onscroll{
+	-webkit-transition: -webkit-transform 0.3s; /* For Safari 3.1 to 6.0 */
+}
+
+.tabbed-slidebox .tsb-icons .scroll a{
+	width:auto;
+	font-size: 1.5em;
+	line-height: 1.5em;
+	text-decoration: none;
+	margin: 0 15px;
+	border-bottom: 3px solid transparent;
+}
+.tabbed-slidebox .tsb-icons .scroll a.active {
+	font-size: 1.8em;
+	border-bottom: 3px solid #ccc;
 }

@@ -9,12 +9,17 @@
     <!-- ionic css -->
     <link href="http://code.ionicframework.com/1.0.0-beta.10/css/ionic.css" rel="stylesheet">
 
+    <!-- your app's css -->
+    <link href="tabSlideBox.css" rel="stylesheet">
+
     <!-- ionic/angularjs scripts -->
     <script src="http://code.ionicframework.com/1.0.0-beta.10/js/ionic.bundle.js"></script>
 	
+	<script src="tabSlideBox.js"></script>
+	
 	<!-- your app's script -->
     <script>
-	    var app = angular.module('slidebox', ['ionic'])
+	    var app = angular.module('slidebox', ['ionic', 'tabSlideBox'])
 		.run(['$q', '$http', '$rootScope', '$location', '$window', '$timeout', 
 					function($q, $http, $rootScope, $location, $window, $timeout){
 	    
@@ -45,6 +50,20 @@
         }
         ]);
     </script>
+    
+	<style>
+		.slider-slide h3{
+			color:#fff;
+			margin-top:10px;
+		};
+		
+		.scroll{
+			height:100%;
+		};
+		
+		
+	</style>
+	
   </head>
 
   <body ng-app="slidebox" animation="slide-left-right-ios7">
@@ -58,10 +77,36 @@
 	
 	<script id="index.html" type="text/ng-template">
       <ion-view title="Tabbed Slide box">
-        <ion-content scroll="false" padding="true">
-          	<h3>Styles</h3>
-			<a class="button button-block icon icon-right ion-chevron-right" href="/tabbedSlideBox/default.html">Default style</a>
-			<a class="button button-block icon icon-right ion-chevron-right" href="/tabbedSlideBox/slidingTabs.html">Scrollable tabs</a>
+        <ion-content scroll="false">
+          	<tab-slide-box tab="2" >
+			    	<div class="tsb-icons">
+			    		<div class="tsb-ic-wrp">
+							<a href="javascript:;" class="ion-home"></a>
+							<a href="javascript:;" class="ion-game-controller-b"></a>
+							<a href="javascript:;" class="ion-email"></a>
+							<a href="javascript:;" class="ion-model-s"></a>
+							<a href="javascript:;" class="ion-person"></a>
+						</div>
+			    	</div>
+			        <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+			            <ion-slide>
+			                <h3>Home content</h3>
+			            </ion-slide>
+			            <ion-slide>
+			                <h3>Games content</h3>
+			            </ion-slide>
+			            <ion-slide>
+			                <h3>Mail content</h3>
+			            </ion-slide>
+						<ion-slide>
+			                <h3>Car content</h3>
+			            </ion-slide>
+			            <ion-slide>
+			                <h3>Profile content</h3>
+			            </ion-slide>
+			            
+			        </ion-slide-box>
+          	</tab-slide-box>
         </ion-content>
       </ion-view>
     </script>

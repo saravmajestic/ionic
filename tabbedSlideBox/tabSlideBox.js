@@ -25,8 +25,8 @@ function SimplePubSub() {
 };
 
 angular.module('tabSlideBox', [])
-.directive('tabSlideBox', [ '$timeout', '$window', '$ionicSlideBoxDelegate',
-	function($timeout, $window, $ionicSlideBoxDelegate) {
+.directive('tabSlideBox', [ '$timeout', '$window', '$ionicSlideBoxDelegate', '$ionicScrollDelegate',
+	function($timeout, $window, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
 		'use strict';
 
 		return {
@@ -37,6 +37,9 @@ angular.module('tabSlideBox', [])
 				$ta.addClass("tabbed-slidebox");
 				
 				var iconsDiv = angular.element(ta.querySelector(".tsb-icons")), icons = iconsDiv.find("a"), wrap = iconsDiv[0].querySelector(".tsb-ic-wrp"), totalTabs = icons.length;
+				
+				var scrollDiv = wrap.querySelector(".scroll");
+				
 				angular.forEach(icons, function(value, key){
 				     var a = angular.element(value);
 				     a.on('click', function(){
@@ -47,13 +50,36 @@ angular.module('tabSlideBox', [])
 				function setPosition(index){
 					var middle = iconsDiv[0].offsetWidth/2;
 					var curEl = angular.element(icons[index]), curElWidth = curEl[0].offsetWidth, curElLeft = curEl[0].offsetLeft;
-					var leftStr = (middle  - (curElLeft) -  curElWidth/2 + 5) + "px";
-					wrap.style.webkitTransform =  "translate3d("+leftStr+",0,0)" ;
-					
+
 					angular.element(iconsDiv[0].querySelector(".active")).removeClass("active");
 					curEl.addClass("active");
+					
+					var leftStr = (middle  - (curElLeft) -  curElWidth/2 + 5);
+					//If tabs are not scrollable
+					if(!scrollDiv){
+						var leftStr = (middle  - (curElLeft) -  curElWidth/2 + 5) + "px";
+						wrap.style.webkitTransform =  "translate3d("+leftStr+",0,0)" ;
+					}else{
+						//If scrollable tabs
+						var wrapWidth = wrap.offsetWidth;
+						var currentX = Math.abs(getX(scrollDiv.style.webkitTransform));
+						var leftOffset = 100;
+						var elementOffset = 40;
+						//If tabs are reaching right end or left end
+						if(((currentX + wrapWidth) < (curElLeft + curElWidth + elementOffset)) || (currentX > (curElLeft - leftOffset))){
+							if(leftStr > 0){
+								leftStr = 0;
+							}
+							//Use this scrollTo, so when scrolling tab manually will not flicker
+							$ionicScrollDelegate.scrollTo(Math.abs(leftStr), 0, true);
+						}
+					}
 				};
-				
+				function getX(matrix) {
+					matrix = matrix.replace("translate3d(","");
+					matrix = matrix.replace("translate(","");
+					return (parseInt(matrix));
+				}
 				var events = scope.events;
 				events.on('slideChange', function(data){
 					setPosition(data.index);
