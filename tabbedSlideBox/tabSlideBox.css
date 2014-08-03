@@ -63,6 +63,7 @@
 }
 .tsb-hscroll.scroll-view{
   	white-space: nowrap;
+	margin:0 auto;
 }
 .tsb-hscroll.scroll-view .scroll-bar{
 	visibility:hidden;
