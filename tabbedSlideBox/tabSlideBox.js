@@ -25,6 +25,18 @@ function SimplePubSub() {
 };
 
 angular.module('tabSlideBox', [])
+.directive('onFinishRender', function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            if (scope.$last === true) {
+                $timeout(function () {
+                    scope.$emit('ngRepeatFinished');
+                });
+            }
+        }
+    }
+})
 .directive('tabSlideBox', [ '$timeout', '$window', '$ionicSlideBoxDelegate', '$ionicScrollDelegate',
 	function($timeout, $window, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
 		'use strict';
@@ -36,20 +48,40 @@ angular.module('tabSlideBox', [])
 				var ta = element[0], $ta = element;
 				$ta.addClass("tabbed-slidebox");
 				
-				var iconsDiv = angular.element(ta.querySelector(".tsb-icons")), icons = iconsDiv.find("a"), wrap = iconsDiv[0].querySelector(".tsb-ic-wrp"), totalTabs = icons.length;
-				
-				var scrollDiv = wrap.querySelector(".scroll");
-				
-				angular.forEach(icons, function(value, key){
-				     var a = angular.element(value);
-				     a.on('click', function(){
-				    	 $ionicSlideBoxDelegate.slide(key);
-				     });
-				});
-				
+				function renderScrollableTabs(){
+					var iconsDiv = angular.element(ta.querySelector(".tsb-icons")), icons = iconsDiv.find("a"), wrap = iconsDiv[0].querySelector(".tsb-ic-wrp"), totalTabs = icons.length;
+					var scrollDiv = wrap.querySelector(".scroll");
+					
+					angular.forEach(icons, function(value, key){
+					     var a = angular.element(value);
+					     a.on('click', function(){
+					    	 $ionicSlideBoxDelegate.slide(key);
+					     });
+					});
+					
+					var initialIndex = attrs.tab;
+					//Initializing the middle tab
+					if(typeof attrs.tab === 'undefined' || (totalTabs <= initialIndex) || initialIndex < 0){
+						initialIndex = Math.floor(icons.length/2);
+					}
+					
+					//If initial element is 0, set position of the tab to 0th tab 
+					if(initialIndex == 0){
+						setPosition(0);
+					}
+					
+					$timeout(function() {
+						$ionicSlideBoxDelegate.slide(initialIndex);
+					}, 0);
+				}
 				function setPosition(index){
+					var iconsDiv = angular.element(ta.querySelector(".tsb-icons")), icons = iconsDiv.find("a"), wrap = iconsDiv[0].querySelector(".tsb-ic-wrp"), totalTabs = icons.length;
+					var scrollDiv = wrap.querySelector(".scroll");
+					
 					var middle = iconsDiv[0].offsetWidth/2;
-					var curEl = angular.element(icons[index]), curElWidth = curEl[0].offsetWidth, curElLeft = curEl[0].offsetLeft;
+					var curEl = angular.element(icons[index]);
+					if(curEl && curEl.length){
+					var curElWidth = curEl[0].offsetWidth, curElLeft = curEl[0].offsetLeft;
 
 					angular.element(iconsDiv[0].querySelector(".active")).removeClass("active");
 					curEl.addClass("active");
@@ -74,6 +106,7 @@ angular.module('tabSlideBox', [])
 							$ionicScrollDelegate.scrollTo(Math.abs(leftStr), 0, true);
 						}
 					}
+					}
 				};
 				function getX(matrix) {
 					matrix = matrix.replace("translate3d(","");
@@ -84,21 +117,11 @@ angular.module('tabSlideBox', [])
 				events.on('slideChange', function(data){
 					setPosition(data.index);
 				});
+				events.on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
+					renderScrollableTabs();
+				});
 				
-				var initialIndex = attrs.tab;
-				//Initializing the middle tab
-				if(typeof attrs.tab === 'undefined' || (totalTabs <= initialIndex) || initialIndex < 0){
-					initialIndex = Math.floor(icons.length/2);
-				}
-				
-				//If initial element is 0, set position of the tab to 0th tab 
-				if(initialIndex == 0){
-					setPosition(0);
-				}
-				
-				$timeout(function() {
-					$ionicSlideBoxDelegate.slide(initialIndex);
-				}, 0);
+				renderScrollableTabs();
 			},
 			controller : function($scope, $attrs, $element) {
 				$scope.events = new SimplePubSub();
@@ -106,6 +129,10 @@ angular.module('tabSlideBox', [])
 				$scope.slideHasChanged = function(index){
 					$scope.events.trigger("slideChange", {"index" : index});
 				};
+				
+				$scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
+					$scope.events.trigger("ngRepeatFinished", {"event" : ngRepeatFinishedEvent});
+				});
 			}
 		};
 
