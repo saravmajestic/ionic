@@ -47,6 +47,9 @@ angular.module('tabSlideBox', [])
 				
 				var ta = element[0], $ta = element;
 				$ta.addClass("tabbed-slidebox");
+				if(attrs.tabsPosition === "bottom"){
+					$ta.addClass("btm");
+				}
 				
 				function renderScrollableTabs(){
 					var iconsDiv = angular.element(ta.querySelector(".tsb-icons")), icons = iconsDiv.find("a"), wrap = iconsDiv[0].querySelector(".tsb-ic-wrp"), totalTabs = icons.length;

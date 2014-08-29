@@ -1,7 +1,9 @@
 .tabbed-slidebox .slider {
     height: 100%;
 }
-
+.tabbed-slidebox.btm .slider {
+    margin-bottom: -50px;
+}
 .tabbed-slidebox .slider-slides {
     width: 100%;
 }
@@ -19,6 +21,7 @@
     text-align: center;
     margin: 10px 0;
     position: relative;
+	background-color:#fff;
 }
 
 .tabbed-slidebox .tsb-ic-wrp {
