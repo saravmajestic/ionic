@@ -59,7 +59,9 @@
 					{"text" : "Photos"},
 					{"text" : "Pets"}
 				];
-			
+				$scope.onSlideMove = function(data){
+					alert("You have selected " + data.index + " tab");
+				};
         }
         ]);
     </script>
