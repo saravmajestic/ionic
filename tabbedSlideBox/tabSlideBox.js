@@ -60,6 +60,10 @@ angular.module('tabSlideBox', [])
 					     a.on('click', function(){
 					    	 $ionicSlideBoxDelegate.slide(key);
 					     });
+
+						if(a.attr('icon-off')) {
+							a.attr("class", a.attr('icon-off'));
+						}
 					});
 					
 					var initialIndex = attrs.tab;
@@ -83,10 +87,18 @@ angular.module('tabSlideBox', [])
 					
 					var middle = iconsDiv[0].offsetWidth/2;
 					var curEl = angular.element(icons[index]);
+					var prvEl = angular.element(iconsDiv[0].querySelector(".active"));
 					if(curEl && curEl.length){
 					var curElWidth = curEl[0].offsetWidth, curElLeft = curEl[0].offsetLeft;
 
-					angular.element(iconsDiv[0].querySelector(".active")).removeClass("active");
+					if(prvEl.attr('icon-off')) {
+						prvEl.attr("class", prvEl.attr('icon-off'));
+					}else{
+						prvEl.removeClass("active");
+					}
+					if(curEl.attr('icon-on')) {
+						curEl.attr("class", curEl.attr('icon-on'));
+					}
 					curEl.addClass("active");
 					
 					var leftStr = (middle  - (curElLeft) -  curElWidth/2 + 5);
@@ -131,9 +143,7 @@ angular.module('tabSlideBox', [])
 				
 				$scope.slideHasChanged = function(index){
 					$scope.events.trigger("slideChange", {"index" : index});
-					$timeout(function(){
-						if($scope.onSlideMove) $scope.onSlideMove({"index" : eval(index)});
-					},100);
+					$timeout(function(){if($scope.onSlideMove) $scope.onSlideMove({"index" : eval(index)});},100);
 				};
 				
 				$scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
