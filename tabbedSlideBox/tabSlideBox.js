@@ -131,7 +131,9 @@ angular.module('tabSlideBox', [])
 				
 				$scope.slideHasChanged = function(index){
 					$scope.events.trigger("slideChange", {"index" : index});
-					$timeout(function(){$scope.onSlideMove({"index" : eval(index)});},100);
+					$timeout(function(){
+						if($scope.onSlideMove) $scope.onSlideMove({"index" : eval(index)});
+					},100);
 				};
 				
 				$scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
