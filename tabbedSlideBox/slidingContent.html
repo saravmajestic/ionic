@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,
+user-scalable=no, width=device-width">
+    <title>Tabbed Slide box</title>
+<!-- ionic css -->
+    <link href="http://code.ionicframework.com/1.0.0-rc.4/css/ionic.css" rel="stylesheet">
+
+<!-- your app's css -->
+    <link href="tabSlideBox.css" rel="stylesheet">
+
+<!-- ionic/angularjs scripts -->
+    <script src="http://code.ionicframework.com/1.0.0-rc.4/js/ionic.bundle.min.js"></script>
+ <script src="tabSlideBox.js"></script>
+ <!-- your app's script -->
+    <script>
+    var app = angular.module('slidebox', ['ionic', 'tabSlideBox'])
+.run(['$q', '$http', '$rootScope', '$location', '$window', '$timeout',
+function($q, $http, $rootScope, $location, $window, $timeout){
+
+        $rootScope.$on("$locationChangeStart", function(event, next,
+current){
+            $rootScope.error = null;
+            console.log("Route change!!!", $location.path());
+            var path = $location.path();
+
+
+            console.log("App Loaded!!!");
+        });
+    }
+    ]);
+ app.config(function($stateProvider, $urlRouterProvider) {
+$stateProvider.state('index', {
+url : '/',
+templateUrl : 'index.html',
+controller : 'IndexCtrl'
+});
+ $urlRouterProvider.otherwise("/");
+});
+        app.controller("IndexCtrl", ['$rootScope', "$scope",
+"$stateParams", "$q", "$location", "$window", '$timeout',
+function($rootScope, $scope, $stateParams, $q, $location, $window,
+$timeout){
+ $scope.tabs = [
+{"text" : "Home"},
+{"text" : "Games"},
+{"text" : "Mail"},
+{"text" : "Car"},
+{"text" : "Profile"},
+{"text" : "Favourites"},
+{"text" : "Chats"},
+{"text" : "Settings"},
+{"text" : "Photos"},
+{"text" : "Pets"}
+];
+$scope.onSlideMove = function(data){
+//alert("You have selected " + data.index + " tab");
+};
+        }
+        ]);
+    </script>
+
+<style>
+.slider-slide h3{
+color:#fff;
+margin-top:10px;
+}
+.scroll{
+height:100%;
+}
+ .tabbed-slidebox .tsb-icons:after{
+display:none;
+}
+</style>
+  </head>
+
+  <body ng-app="slidebox" animation="slide-left-right-ios7">
+
+    <ion-nav-bar class="nav-title-slide-ios7 bar-positive">
+        <ion-nav-back-button class="button-icon ion-arrow-left-c">
+        </ion-nav-back-button>
+    </ion-nav-bar>
+
+    <ion-nav-view ng-controller="IndexCtrl"></ion-nav-view>
+ <script id="index.html" type="text/ng-template">
+      <ion-view title="Scrollable Tabbed Slide box">
+        <ion-content scroll="false">
+          <tab-slide-box tab="0">
+     <div class="tsb-icons">
+     <div class="tsb-ic-wrp">
+<ion-scroll direction="x" class="tsb-hscroll">
+<a href="javascript:;" class="{{tab.icon}}" ng-repeat="tab in tabs"
+on-finish-render="test()">{{tab.text}}</a>
+</ion-scroll>
+</div>
+     </div>
+        <ion-slide-box show-pager="false"
+on-slide-changed="slideHasChanged($index)">
+            <ion-slide>
+<ion-scroll style="height:100%" delegate-handle="slide1Scroll" >
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+                <h3>Home content</h3>
+</ion-scroll>
+            </ion-slide>
+            <ion-slide>
+                <ion-list>
+                <ion-scroll style="height:100%">
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+                 <ion-item>check</ion-item>
+
+                </ion-item>
+            </ion-slide>
+            <ion-slide>
+                <h3>Mail content</h3>
+            </ion-slide>
+<ion-slide>
+                <h3>Car content</h3>
+            </ion-slide>
+            <ion-slide>
+                <h3>Profile content</h3>
+            </ion-slide>
+            <ion-slide>
+                <h3>Favourites content</h3>
+            </ion-slide>
+<ion-slide>
+                <h3>Chats content</h3>
+            </ion-slide>
+<ion-slide>
+                <h3>Settings content</h3>
+            </ion-slide>
+<ion-slide>
+                <h3>Photos content</h3>
+            </ion-slide>
+<ion-slide>
+                <h3>Pets content</h3>
+            </ion-slide>
+        </ion-slide-box>
+          </tab-slide-box>
+        </ion-content>
+      </ion-view>
+    </script>
+  </body>
+</html>
