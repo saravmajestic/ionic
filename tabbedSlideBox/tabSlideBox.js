@@ -51,6 +51,19 @@ angular.module('tabSlideBox', [])
 					$ta.addClass("btm");
 				}
 				
+				//Handle multiple slide/scroll boxes
+				var handle = ta.querySelector('.slider').getAttribute('delegate-handle');
+				
+				var ionicSlideBoxDelegate = $ionicSlideBoxDelegate;
+				if(handle){
+					ionicSlideBoxDelegate = ionicSlideBoxDelegate.$getByHandle(handle);
+				}
+				
+				var ionicScrollDelegate = $ionicScrollDelegate;
+				if(handle){
+					ionicScrollDelegate = ionicScrollDelegate.$getByHandle(handle);
+				}
+				
 				function renderScrollableTabs(){
 					var iconsDiv = angular.element(ta.querySelector(".tsb-icons")), icons = iconsDiv.find("a"), wrap = iconsDiv[0].querySelector(".tsb-ic-wrp"), totalTabs = icons.length;
 					var scrollDiv = wrap.querySelector(".scroll");
@@ -58,7 +71,7 @@ angular.module('tabSlideBox', [])
 					angular.forEach(icons, function(value, key){
 					     var a = angular.element(value);
 					     a.on('click', function(){
-					    	 $ionicSlideBoxDelegate.slide(key);
+					    	 ionicSlideBoxDelegate.slide(key);
 					     });
 					});
 					
@@ -74,7 +87,7 @@ angular.module('tabSlideBox', [])
 					}
 					
 					$timeout(function() {
-						$ionicSlideBoxDelegate.slide(initialIndex);
+						ionicSlideBoxDelegate.slide(initialIndex);
 					}, 0);
 				}
 				function setPosition(index){
@@ -106,7 +119,7 @@ angular.module('tabSlideBox', [])
 								leftStr = 0;
 							}
 							//Use this scrollTo, so when scrolling tab manually will not flicker
-							$ionicScrollDelegate.scrollTo(Math.abs(leftStr), 0, true);
+							ionicScrollDelegate.scrollTo(Math.abs(leftStr), 0, true);
 						}
 					}
 					}
