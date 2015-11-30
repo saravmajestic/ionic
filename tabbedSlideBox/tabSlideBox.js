@@ -63,6 +63,11 @@ angular.module('tabSlideBox', [])
 				if(handle){
 					ionicScrollDelegate = ionicScrollDelegate.$getByHandle(handle);
 				}
+
+				var noSwipe = ta.querySelector('.slider').getAttribute('no-swipe');
+				if(noSwipe !== null) {
+					$ionicSlideBoxDelegate.enableSlide(false);
+				}
 				
 				function renderScrollableTabs(){
 					var iconsDiv = angular.element(ta.querySelector(".tsb-icons")), icons = iconsDiv.find("a"), wrap = iconsDiv[0].querySelector(".tsb-ic-wrp"), totalTabs = icons.length;
