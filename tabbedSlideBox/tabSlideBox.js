@@ -25,7 +25,7 @@ function SimplePubSub() {
 };
 
 angular.module('tabSlideBox', [])
-.directive('onFinishRender', function ($timeout) {
+.directive('onFinishRender',['$timeout', function ($timeout) {
     return {
         restrict: 'A',
         link: function (scope, element, attr) {
@@ -36,7 +36,7 @@ angular.module('tabSlideBox', [])
             }
         }
     }
-})
+}])
 .directive('tabSlideBox', [ '$timeout', '$window', '$ionicSlideBoxDelegate', '$ionicScrollDelegate',
 	function($timeout, $window, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
 		'use strict';
